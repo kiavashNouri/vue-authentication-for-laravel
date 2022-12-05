@@ -92,12 +92,12 @@ export default {
   },
   created() {
   },
-  // beforeRouteEnter(to, from, next) {
-  //   if (JSON.parse(localStorage.getItem('isAuth'))) {
-  //     window.location.href="http://localhost:8080/dashboard"
-  //   }
-  //   next();
-  // }
+  beforeRouteEnter(to, from, next) {
+    if (JSON.parse(localStorage.getItem('isAuth'))) {
+      window.location.href="http://localhost:8080/dashboard"
+    }
+    next();
+  }
 }
 </script>
 

@@ -52,10 +52,11 @@
       </div>
     </div>
   </div>
+  <router-link to="{name:'TestComponent',params:{id:2}}"></router-link>
 </template>
 
 <script>
-import router from "@/router";
+// import router from "@/router";
 // import axios from "axios";
 
 export default {
@@ -68,34 +69,37 @@ export default {
     }
   },
   methods: {
-    handleRegister(e) {
-      e.preventDefault();
-      this.$axios.get('http://localhost:8000/sanctum/csrf-cookie').then(() => {
-        this.$axios.post('http://localhost:8000/api/register', {
-          name: this.name,
-          email: this.email,
-          password: this.password
-        }).then(res => {
-          if (res.data.status === 201) {
-            router.push('/login')
-          }
-        }).catch(error => {
-          if (error.response.status === 422) {
-            this.error = error.response.data.errors.email[0]
-          }
-        })
-      })
-    }
+    // handleRegister(e) {
+    //   e.preventDefault();
+    //   this.$axios.get('http://localhost:8000/sanctum/csrf-cookie').then(() => {
+    //     this.$axios.post('http://localhost:8000/api/register', {
+    //       name: this.name,
+    //       email: this.email,
+    //       password: this.password
+    //     }).then(res => {
+    //       if (res.data.status === 201) {
+    //         router.push('/login')
+    //       }
+    //     }).catch(error => {
+    //       if (error.response.status === 422) {
+    //         this.error = error.response.data.errors.email[0]
+    //       }
+    //     })
+    //   })
+    // }
   },
   created() {
-    console.log('ok')
+    this.$axios.get('http://manager.avatoop.com/api/indexnews').then((res)=>{
+      console.log(res)
+    })
+    // console.log('ok')
   },
-  beforeRouteEnter(to, from, next) {
-    if (JSON.parse(localStorage.getItem('isAuth'))) {
-      window.location.href="http://localhost:8080/dashboard"
-    }
-    next();
-  }
+  // beforeRouteEnter(to, from, next) {
+  //   if (JSON.parse(localStorage.getItem('isAuth'))) {
+  //     window.location.href="http://localhost:8080/dashboard"
+  //   }
+  //   next();
+  // }
 }
 </script>
 
